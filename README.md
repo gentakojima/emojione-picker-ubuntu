@@ -13,7 +13,7 @@ Installation is optional, but recommended to run the program at session startup 
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
   2. Build the package: `equivs-build debian_package.ctl`
-  3. Install it! `sudo dpkg -i emojione-picker-*.deb`
+  3. Install it! `sudo dpkg -i emojione-picker*.deb`
   4. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
 
