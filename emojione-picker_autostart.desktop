@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Emojione Picker
+Comment=Emoji Picker for Ubuntu
+Icon=/usr/share/emojione-picker/icon.svg
+Exec=/usr/bin/emojione-picker
+Terminal=false
+Type=Application
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=10
+
+

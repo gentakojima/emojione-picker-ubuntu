@@ -1,0 +1,208 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+#
+
+import os
+import thread
+import sys
+from time import sleep
+import json
+from os.path import expanduser
+import signal
+from collections import OrderedDict
+import re
+
+# Fix enconding in older Python versions
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+# Import GTK
+from gi.repository import GLib, Gtk, GObject, Gdk
+from gi.repository import AppIndicator3 as appindicator
+
+# Where is the data?
+directories = [expanduser("~") + "/.local/share/emojione-picker", os.path.dirname(os.path.realpath("__file__")), "/usr/local/share/emojione-picker", "/usr/share/emojione-picker"]
+for d in directories:
+    if os.path.isdir(d):
+        directory = d;
+
+# Categories definitions
+categories = ["recent", "people", "foods", "nature", "objects", "activity", "travel", "flags", "symbols"]
+recenticons = OrderedDict()
+
+# Load configuration
+configpath = expanduser("~") + "/.config/emojione-picker"
+os.path.isdir(configpath) or os.mkdir(configpath)
+recentfile = configpath+"/recent.json"
+if os.path.isfile(recentfile):
+  with open(recentfile) as recent_json_file:
+      recent = json.load(recent_json_file)
+  recentindex = 0
+  for k in recent.keys():
+      if(int(recent[k]["recent_order"])>recentindex):
+          recentindex = int(recent[k]["recent_order"])+1
+else:
+  recent = dict()
+  recentindex = 0
+
+# Refresh recent icons submenu
+def refresh_recent_submenu():
+    global recent, recent_items
+
+    # Rearrange data
+    def orderfunc(tup):
+        key, d = tup
+        return -int(d["recent_order"])
+    sorted_recent = sorted(recent.items(), key=orderfunc)
+    sorted_recent = OrderedDict(sorted_recent)
+
+    # Refresh icons
+    i = 0
+    for key in sorted_recent:
+
+        img = Gtk.Image()
+        img.set_from_file(directory + "/assets/svg/" + sorted_recent[key]["unicode"] + ".svg")
+        recent_items[i].set_image(img)
+        recent_items[i].set_label(sorted_recent[key]["name"].title())
+        recent_items[i].show()
+        recent_items[i].connect("activate", item_response, sorted_recent[key])
+        i = i + 1
+
+# Click response
+def item_response(self, w):
+    global recentindex, recent
+
+    # Copy character to clipboard
+    chars = w["unicode"].split("-")
+    output = ""
+    for char in chars:
+        output = output + '\\U' + (char.zfill(8))
+    clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+    GLib.idle_add(clipboard.set_text,output.decode('unicode-escape'), -1)
+
+    # Remove item from recent if already present
+    try:
+        for k in recent.keys():
+            if recent[k]["emoji_order"] == w["emoji_order"]:
+                del recent[k]
+    except ValueError:
+        pass
+
+    # Remove oldest item if recent is too big
+    if len(recent)>=recent_items_maxno:
+        smallestindex = float("inf")
+        for k in recent.keys():
+            if(recent[k]["recent_order"]<smallestindex):
+                smallestindex = recent[k]["recent_order"]
+                keytodelete = k
+        del recent[keytodelete]
+
+    # Store item on recent
+    w["recent_order"] = recentindex
+    recentindex=recentindex+1
+    recent.update({w["emoji_order"]:w})
+
+    # Save recentfile
+    with open(recentfile, 'w') as outfile:
+        json.dump(recent, outfile)
+
+    # Refresh recent icons submenu
+    GLib.idle_add(refresh_recent_submenu)  
+
+if __name__ == "__main__":
+    # Calling GObject.threads_init() is not needed for PyGObject 3.10.2+
+    GObject.threads_init()
+
+    # Create the main menu
+    menu = Gtk.Menu()
+
+    # Create indicator
+    ind = appindicator.Indicator.new("emojione-picker", directory + "/assets/icon.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
+    ind.set_status(appindicator.IndicatorStatus.ACTIVE)
+    
+    # Create categories items and submenus
+    category_item = {}
+    category_menu = {}
+    for category in categories:
+        img = Gtk.Image()
+        img.set_from_file(directory + "/assets/categories/" + category + ".svg")
+        category_item[category] = Gtk.ImageMenuItem(category.title())
+        settings = category_item[category].get_settings()
+        settings.set_property('gtk-menu-images', True)
+        GLib.idle_add(category_item[category].set_image, img)
+        category_menu[category] = Gtk.Menu()
+        category_item[category].set_submenu(category_menu[category]);
+
+    # Load icons definition and rearrange them in order
+    with open(directory + "/assets/emoji.json") as json_file:
+        json_data = json.load(json_file)
+        def orderfunc(tup):
+            key, d = tup
+            return int(d["emoji_order"])
+        sorted_data = sorted(json_data.items(), key=orderfunc)
+        sorted_data = OrderedDict(sorted_data)
+
+    # Load icons into menu items
+    tones_re = re.compile('(.*) tone[ ]?\d', re.IGNORECASE)
+    tones = []
+    for category in categories:
+        for key in sorted_data:
+            if sorted_data[key]["category"] == category:
+                if tones_re.match(sorted_data[key]["name"]) == None:
+                    img = Gtk.Image()
+                    img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                    icon_item = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
+                    settings = icon_item.get_settings()
+                    settings.set_property('gtk-menu-images', True)
+                    GLib.idle_add(icon_item.set_image, img)
+                    GLib.idle_add(category_menu[category].append, icon_item)
+                    GLib.idle_add(icon_item.show)
+                    icon_item.connect("activate", item_response, sorted_data[key])
+                else:
+                    tones.append(sorted_data[key])
+                # Skin tones are grouped and appended as a submenu
+                if(len(tones)==5):
+                    img = Gtk.Image()
+                    img.set_from_file(directory + "/assets/svg/" + tones[2]["unicode"] + ".svg")
+                    icon_item = Gtk.ImageMenuItem(tones_re.sub(r'\1',tones[2]["name"]).title())
+                    settings = icon_item.get_settings()
+                    settings.set_property('gtk-menu-images', True)
+                    tones_menu = Gtk.Menu()
+                    for i in range(0,5):
+                        subimg = Gtk.Image()
+                        subimg.set_from_file(directory + "/assets/svg/" + tones[i]["unicode"] + ".svg")
+                        subicon_item = Gtk.ImageMenuItem(tones[i]["name"].title())
+                        settings = subicon_item.get_settings()
+                        settings.set_property('gtk-menu-images', True)
+                        GLib.idle_add(subicon_item.set_image, subimg)
+                        subicon_item.connect("activate", item_response, tones[i])
+                        GLib.idle_add(tones_menu.append, subicon_item)
+                        GLib.idle_add(subicon_item.show)
+                    GLib.idle_add(icon_item.set_image, img)
+                    GLib.idle_add(icon_item.set_submenu, tones_menu)
+                    GLib.idle_add(category_menu[category].append, icon_item)
+                    GLib.idle_add(icon_item.show)
+                    tones = []
+
+    # Load icons into recent category
+    recent_items = []
+    recent_items_maxno = 20
+    for i in range (0, recent_items_maxno):
+        recent_items.append( Gtk.ImageMenuItem())
+        settings = recent_items[i].get_settings()
+        settings.set_property('gtk-menu-images', True)
+        category_menu["recent"].append(recent_items[i])
+    refresh_recent_submenu()
+
+    # Append categories to main menu
+    for category in categories:
+        GLib.idle_add(menu.append, category_item[category])
+        GLib.idle_add(category_item[category].show)
+
+    # Associate menu with indicator
+    ind.set_menu(menu)
+
+    # Gtk main - call after first update
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    Gtk.main()
+
