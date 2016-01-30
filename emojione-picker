@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 # Import GTK
-from gi.repository import GLib, Gtk, GObject, Gdk
+from gi.repository import GLib, Gtk, GObject, Gdk, Notify
 from gi.repository import AppIndicator3 as appindicator
 
 # Where is the data?
@@ -80,6 +80,10 @@ def item_response(self, w):
     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
     GLib.idle_add(clipboard.set_text,output.decode('unicode-escape'), -1)
 
+    # Show notification
+    n = Notify.Notification.new(w["name"].title(), "Emoji is now in the clipboard. Paste it wherever you want!", directory + "/assets/svg/" + w["unicode"] + ".svg")
+    n.show()
+
     # Remove item from recent if already present
     try:
         for k in recent.keys():
@@ -112,6 +116,9 @@ def item_response(self, w):
 if __name__ == "__main__":
     # Calling GObject.threads_init() is not needed for PyGObject 3.10.2+
     GObject.threads_init()
+
+    # Initialize notifications
+    Notify.init("emojione-picker")
 
     # Create the main menu
     menu = Gtk.Menu()

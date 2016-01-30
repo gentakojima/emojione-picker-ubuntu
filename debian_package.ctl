@@ -7,7 +7,7 @@ Standards-Version: 3.9.2
 Package: emojione-picker
 Version: 0.1
 Maintainer: Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
-Depends: python-gi (>=3.2), python (>=2.7), python (<<2.8), python-pil (>=2.3.0) | python-imaging (>=1.1.7)
+Depends: python-gi (>=3.2), python (>=2.7), python (<<2.8), python-pil (>=2.3.0) | python-imaging (>=1.1.7), python-notify (>=0.1)
 Architecture: all
 Files: emojione-picker /usr/bin
   emojione-picker_autostart.desktop /etc/xdg/autostart
