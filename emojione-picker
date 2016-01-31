@@ -72,6 +72,10 @@ def refresh_recent_submenu():
 def item_response(self, w):
     global recentindex, recent
 
+    # If this is a toned item with submenu, do nothing
+    if self.get_submenu() != None:
+        return
+
     # Copy character to clipboard
     chars = w["unicode"].split("-")
     output = ""
@@ -113,6 +117,12 @@ def item_response(self, w):
     # Refresh recent icons submenu
     GLib.idle_add(refresh_recent_submenu)  
 
+def get_emoji_group(code):
+    for key in groups_data:
+        if code in groups_data[key]["unicodes"]:
+            return key
+    return False
+
 if __name__ == "__main__":
     # Calling GObject.threads_init() is not needed for PyGObject 3.10.2+
     GObject.threads_init()
@@ -140,7 +150,9 @@ if __name__ == "__main__":
         category_menu[category] = Gtk.Menu()
         category_item[category].set_submenu(category_menu[category]);
 
-    # Load icons definition and rearrange them in order
+    # Load groups and icons definition and rearrange them in order
+    with open(directory + "/assets/groups.json") as groups_file:
+        groups_data = json.load(groups_file)
     with open(directory + "/assets/emoji.json") as json_file:
         json_data = json.load(json_file)
         def orderfunc(tup):
@@ -151,45 +163,90 @@ if __name__ == "__main__":
 
     # Load icons into menu items
     tones_re = re.compile('(.*) tone[ ]?\d', re.IGNORECASE)
-    tones = []
+    item_groups = {}
+    submenu_groups = {}
+    items = {}
+    tone_groups = {}
+    submenu_tones = {}
     for category in categories:
         for key in sorted_data:
             if sorted_data[key]["category"] == category:
-                if tones_re.match(sorted_data[key]["name"]) == None:
-                    img = Gtk.Image()
-                    img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
-                    icon_item = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
-                    settings = icon_item.get_settings()
-                    settings.set_property('gtk-menu-images', True)
-                    GLib.idle_add(icon_item.set_image, img)
-                    GLib.idle_add(category_menu[category].append, icon_item)
-                    GLib.idle_add(icon_item.show)
-                    icon_item.connect("activate", item_response, sorted_data[key])
-                else:
-                    tones.append(sorted_data[key])
-                # Skin tones are grouped and appended as a submenu
-                if(len(tones)==5):
-                    img = Gtk.Image()
-                    img.set_from_file(directory + "/assets/svg/" + tones[2]["unicode"] + ".svg")
-                    icon_item = Gtk.ImageMenuItem(tones_re.sub(r'\1',tones[2]["name"]).title())
-                    settings = icon_item.get_settings()
-                    settings.set_property('gtk-menu-images', True)
-                    tones_menu = Gtk.Menu()
-                    for i in range(0,5):
-                        subimg = Gtk.Image()
-                        subimg.set_from_file(directory + "/assets/svg/" + tones[i]["unicode"] + ".svg")
-                        subicon_item = Gtk.ImageMenuItem(tones[i]["name"].title())
-                        settings = subicon_item.get_settings()
+                emoji_group = get_emoji_group(sorted_data[key]["unicode"])
+                if emoji_group != False:
+                    # Grouped emoji
+                    if not emoji_group in item_groups:
+                        # Create group item
+                        img = Gtk.Image()
+                        img.set_from_file(directory + "/assets/svg/" + groups_data[emoji_group]["icon"] + ".svg")
+                        item_groups[emoji_group] = Gtk.ImageMenuItem(groups_data[emoji_group]["name"].title())
+                        settings = item_groups[emoji_group].get_settings()
                         settings.set_property('gtk-menu-images', True)
-                        GLib.idle_add(subicon_item.set_image, subimg)
-                        subicon_item.connect("activate", item_response, tones[i])
-                        GLib.idle_add(tones_menu.append, subicon_item)
-                        GLib.idle_add(subicon_item.show)
-                    GLib.idle_add(icon_item.set_image, img)
-                    GLib.idle_add(icon_item.set_submenu, tones_menu)
-                    GLib.idle_add(category_menu[category].append, icon_item)
-                    GLib.idle_add(icon_item.show)
-                    tones = []
+                        GLib.idle_add(item_groups[emoji_group].set_image, img)
+                        GLib.idle_add(category_menu[category].append, item_groups[emoji_group])
+                        GLib.idle_add(item_groups[emoji_group].show)
+                        # Create group submenu
+                        submenu_groups[emoji_group] = Gtk.Menu()
+                        GLib.idle_add(item_groups[emoji_group].set_submenu, submenu_groups[emoji_group])
+                    if tones_re.match(sorted_data[key]["name"]) == None: 
+                        img = Gtk.Image()
+                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                        items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
+                        settings = items[sorted_data[key]["unicode"]].get_settings()
+                        settings.set_property('gtk-menu-images', True)
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].set_image, img)
+                        GLib.idle_add(submenu_groups[emoji_group].append, items[sorted_data[key]["unicode"]])
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].show)
+                        items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
+                    else:
+                        # This won't happen, we are not grouping toned icons
+                        pass
+                else:
+                    if tones_re.match(sorted_data[key]["name"]) == None: 
+                        # Not toned emoji (aka simplest case), just add to menu
+                        img = Gtk.Image()
+                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                        items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
+                        settings = items[sorted_data[key]["unicode"]].get_settings()
+                        settings.set_property('gtk-menu-images', True)
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].set_image, img)
+                        GLib.idle_add(category_menu[category].append, items[sorted_data[key]["unicode"]])
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].show)
+                        items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
+                    else:
+                        # Toned emoji
+                        original_key = key
+                        chars = sorted_data[key]["unicode"].split("-")
+                        tone_group = chars[0] # FIXME this can be multibyte so taking the first byt isn't right
+                        if not tone_group in tone_groups:
+                            # Create tone submenu
+                            submenu_tones[tone_group] = Gtk.Menu()
+                            GLib.idle_add(items[tone_group].set_submenu, submenu_tones[tone_group])
+                            tone_groups[tone_group] = items[tone_group]
+                            # Get key from original icon
+                            for k in sorted_data:
+                                if sorted_data[k]["unicode"] == tone_group:
+                                    key = k
+                            # Append untoned icon to submenu
+                            img = Gtk.Image()
+                            img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                            items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
+                            settings = items[tone_group].get_settings()
+                            settings.set_property('gtk-menu-images', True)
+                            GLib.idle_add(items[sorted_data[key]["unicode"]].set_image, img)
+                            GLib.idle_add(submenu_tones[tone_group].append, items[sorted_data[key]["unicode"]])
+                            GLib.idle_add(items[sorted_data[key]["unicode"]].show)
+                            items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
+                        key = original_key
+                        # Append toned emoji to toned submenu
+                        img = Gtk.Image()
+                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                        items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
+                        settings = items[sorted_data[key]["unicode"]].get_settings()
+                        settings.set_property('gtk-menu-images', True)
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].set_image, img)
+                        GLib.idle_add(submenu_tones[tone_group].append, items[sorted_data[key]["unicode"]])
+                        GLib.idle_add(items[sorted_data[key]["unicode"]].show)
+                        items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
 
     # Load icons into recent category
     recent_items = []

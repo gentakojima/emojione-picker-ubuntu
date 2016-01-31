@@ -1645,4 +1645,5 @@ Files: emojione-picker /usr/bin
   assets/categories/symbols.svg /usr/share/emojione-picker
   assets/categories/nature.svg /usr/share/emojione-picker
   assets/emoji.json /usr/share/emojione-picker
+  assets/groups.json /usr/share/emojione-picker
   assets/icon.svg /usr/share/emojione-picker
