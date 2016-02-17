@@ -32,10 +32,6 @@ If you want to manually run it now, just press `Alt+F2` and write the command `e
 
 ## Troubleshooting issues
 
-This program requires Python 2.7 and it's known to fail with Python 3.0 at the moment. Some distributions are defaulting now to Python 3.0. If you can't run it, change the first line in the file `emojione-picker` to read like this:
-
-    #!/usr/bin/python2.7
-
 The indicator might take some time to display on older systems. It usually takes 3 to 5 seconds, but as stated on issue #3, it can take up to 30 seconds, so be patient.
 
 ## How to use it
