@@ -244,6 +244,16 @@
     "name":"Misc",
     "icon":"1f1f7-1f1ea"
   },
+  "speakers": {
+    "unicodes":["1f508","1f509","1f50a","1f50a","1f507","1f4e3","1f4e2","1f514","1f515"],
+    "name":"Speakers and bells",
+    "icon":"1f50a"
+  },
+  "math_signs": {
+    "unicodes":["2795","2796","2797","2716"],
+    "name":"Mathematical signs",
+    "icon":"2795"
+  },
   "": {
     "unicodes":[""],
     "name":"",
