@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 # Import GTK
-from gi.repository import GLib, Gtk, GObject, Gdk, Notify
+from gi.repository import GLib, Gtk, GObject, Gdk, Notify, GdkPixbuf
 from gi.repository import AppIndicator3 as appindicator
 
 # Where is the data?
@@ -136,13 +136,16 @@ if __name__ == "__main__":
     # Create indicator
     ind = appindicator.Indicator.new("emojione-picker", directory + "/assets/icon.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
     ind.set_status(appindicator.IndicatorStatus.ACTIVE)
+
+    # Get proper icon sizes
+    iconsizes = Gtk.IconSize.lookup(Gtk.IconSize.MENU)
     
     # Create categories items and submenus
     category_item = {}
     category_menu = {}
     for category in categories:
-        img = Gtk.Image()
-        img.set_from_file(directory + "/assets/categories/" + category + ".svg")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/categories/" + category + ".svg", iconsizes[1], iconsizes[2])
+        img = Gtk.Image.new_from_pixbuf(pixbuf)
         category_item[category] = Gtk.ImageMenuItem(category.title())
         settings = category_item[category].get_settings()
         settings.set_property('gtk-menu-images', True)
@@ -176,8 +179,8 @@ if __name__ == "__main__":
                     # Grouped emoji
                     if not emoji_group in item_groups:
                         # Create group item
-                        img = Gtk.Image()
-                        img.set_from_file(directory + "/assets/svg/" + groups_data[emoji_group]["icon"] + ".svg")
+                        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + groups_data[emoji_group]["icon"] + ".svg", iconsizes[1], iconsizes[2])
+                        img = Gtk.Image.new_from_pixbuf(pixbuf)
                         item_groups[emoji_group] = Gtk.ImageMenuItem(groups_data[emoji_group]["name"].title())
                         settings = item_groups[emoji_group].get_settings()
                         settings.set_property('gtk-menu-images', True)
@@ -187,9 +190,9 @@ if __name__ == "__main__":
                         # Create group submenu
                         submenu_groups[emoji_group] = Gtk.Menu()
                         GLib.idle_add(item_groups[emoji_group].set_submenu, submenu_groups[emoji_group])
-                    if tones_re.match(sorted_data[key]["name"]) == None: 
-                        img = Gtk.Image()
-                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                    if tones_re.match(sorted_data[key]["name"]) == None:
+                        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
+                        img = Gtk.Image.new_from_pixbuf(pixbuf)
                         items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
                         settings = items[sorted_data[key]["unicode"]].get_settings()
                         settings.set_property('gtk-menu-images', True)
@@ -203,8 +206,8 @@ if __name__ == "__main__":
                 else:
                     if tones_re.match(sorted_data[key]["name"]) == None: 
                         # Not toned emoji (aka simplest case), just add to menu
-                        img = Gtk.Image()
-                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
+                        img = Gtk.Image.new_from_pixbuf(pixbuf)
                         items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
                         settings = items[sorted_data[key]["unicode"]].get_settings()
                         settings.set_property('gtk-menu-images', True)
@@ -227,8 +230,8 @@ if __name__ == "__main__":
                                 if sorted_data[k]["unicode"] == tone_group:
                                     key = k
                             # Append untoned icon to submenu
-                            img = Gtk.Image()
-                            img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
+                            img = Gtk.Image.new_from_pixbuf(pixbuf)
                             items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
                             settings = items[tone_group].get_settings()
                             settings.set_property('gtk-menu-images', True)
@@ -238,8 +241,8 @@ if __name__ == "__main__":
                             items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
                         key = original_key
                         # Append toned emoji to toned submenu
-                        img = Gtk.Image()
-                        img.set_from_file(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg")
+                        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
+                        img = Gtk.Image.new_from_pixbuf(pixbuf)
                         items[sorted_data[key]["unicode"]] = Gtk.ImageMenuItem(sorted_data[key]["name"].title())
                         settings = items[sorted_data[key]["unicode"]].get_settings()
                         settings.set_property('gtk-menu-images', True)
