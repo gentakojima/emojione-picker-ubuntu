@@ -59,9 +59,8 @@ def refresh_recent_submenu():
     # Refresh icons
     i = 0
     for key in sorted_recent:
-
-        img = Gtk.Image()
-        img.set_from_file(directory + "/assets/svg/" + sorted_recent[key]["unicode"] + ".svg")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
+        img = Gtk.Image.new_from_pixbuf(pixbuf)
         recent_items[i].set_image(img)
         recent_items[i].set_label(sorted_recent[key]["name"].title())
         recent_items[i].show()
