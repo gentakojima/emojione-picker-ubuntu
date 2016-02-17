@@ -25,6 +25,7 @@ directories = [expanduser("~") + "/.local/share/emojione-picker", os.path.dirnam
 for d in directories:
     if os.path.isdir(d):
         directory = d;
+        break
 
 # Categories definitions
 categories = ["recent", "people", "foods", "nature", "objects", "activity", "travel", "flags", "symbols"]
