@@ -21,7 +21,7 @@ from gi.repository import GLib, Gtk, GObject, Gdk, Notify, GdkPixbuf
 from gi.repository import AppIndicator3 as appindicator
 
 # Where is the data?
-directories = [expanduser("~") + "/.local/share/emojione-picker", os.path.dirname(os.path.realpath("__file__")), "/usr/local/share/emojione-picker", "/usr/share/emojione-picker"]
+directories = [expanduser("~") + "/.local/share/emojione-picker", "/usr/local/share/emojione-picker", "/usr/share/emojione-picker", os.path.dirname(os.path.realpath(__file__))]
 for d in directories:
     if os.path.isdir(d):
         directory = d;
