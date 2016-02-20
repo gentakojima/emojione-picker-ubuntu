@@ -137,6 +137,14 @@ if __name__ == "__main__":
     ind = appindicator.Indicator.new("emojione-picker", directory + "/assets/icon.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
     ind.set_status(appindicator.IndicatorStatus.ACTIVE)
 
+    # If there is a icon present in the theme, use it!
+    try:
+      icons = Gtk.IconTheme.get_default()
+      icon = icons.load_icon("emojione-picker", Gtk.IconSize.MENU, 0)
+      ind.set_icon("emojione-picker")
+    except:
+      pass
+
     # Get proper icon sizes
     iconsizes = Gtk.IconSize.lookup(Gtk.IconSize.MENU)
     
