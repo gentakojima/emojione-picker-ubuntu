@@ -14,10 +14,10 @@
    width="22"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="icon.svg"
-   inkscape:export-filename="/home/jorge/emojione-picker-ubuntu/assets/icon-mono-dark-16.png"
-   inkscape:export-xdpi="65.454544"
-   inkscape:export-ydpi="65.454544">
+   sodipodi:docname="icon-mono-light.svg"
+   inkscape:export-filename="/home/jorge/emojione-picker-ubuntu/assets/icon-mono-light-24.png"
+   inkscape:export-xdpi="98.181816"
+   inkscape:export-ydpi="98.181816">
   <defs
      id="defs8" />
   <sodipodi:namedview
@@ -34,8 +34,8 @@
      id="namedview6"
      showgrid="false"
      inkscape:zoom="14.205256"
-     inkscape:cx="15.825164"
-     inkscape:cy="9.2043726"
+     inkscape:cx="18.66621"
+     inkscape:cy="8.5715228"
      inkscape:window-x="91"
      inkscape:window-y="198"
      inkscape:window-maximized="0"
@@ -53,7 +53,7 @@
     </rdf:RDF>
   </metadata>
   <circle
-     style="fill:#000000;fill-opacity:0.39215687"
+     style="fill:#ffffff;fill-opacity:0.39215687"
      cx="11"
      cy="11.543832"
      r="8.3917198"
@@ -63,34 +63,34 @@
      r="8.3917198"
      cy="10.465481"
      cx="11"
-     style="fill:#ffd42a;fill-opacity:1" />
+     style="fill:#333333;fill-opacity:1" />
   <path
      id="path4145"
      d="m 15.475584,11.864102 c 0,1.806737 -1.486454,3.916136 -4.475584,3.916136 -2.98997,0 -4.4755842,-2.109399 -4.4755842,-3.916136 0,0 1.4853345,0 4.4755842,0 2.98913,0 4.475584,0 4.475584,0 z"
      inkscape:connector-curvature="0"
-     style="fill:#333333;fill-opacity:1" />
+     style="fill:#dfdbd2;fill-opacity:1" />
   <rect
      id="rect4149"
      height="1.6783439"
      width="8.4384336"
      y="11.864101"
      x="6.7809229"
-     style="fill:#ffffff" />
+     style="fill:#4d4d4d" />
   <path
      id="path4153"
      d="m 11,16.059962 c -3.0889924,0 -4.7553081,-2.161987 -4.7553081,-4.19586 l 0,-0.279724 9.5106151,0 0,0.279724 c 0,2.033873 -1.666874,4.19586 -4.755307,4.19586 z M 6.8161679,12.143546 C 6.9627434,13.818814 8.418427,15.500514 11,15.500514 c 2.581572,0 4.036976,-1.6817 4.183273,-3.356968 l -8.3671051,0 z"
      inkscape:connector-curvature="0"
-     style="fill:#333333;fill-opacity:1" />
+     style="fill:#dfdbd2;fill-opacity:1" />
   <circle
      id="circle4157"
      r="1.2587579"
      cy="8.3675528"
      cx="7.7831736"
-     style="fill:#333333;fill-opacity:1" />
+     style="fill:#dfdbd2;fill-opacity:1" />
   <circle
      id="circle4161"
      r="1.2587579"
      cy="8.3675528"
      cx="14.216825"
-     style="fill:#333333;fill-opacity:1" />
+     style="fill:#dfdbd2;fill-opacity:1" />
 </svg>

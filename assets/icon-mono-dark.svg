@@ -14,10 +14,10 @@
    width="22"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="icon.svg"
-   inkscape:export-filename="/home/jorge/emojione-picker-ubuntu/assets/icon-mono-dark-16.png"
-   inkscape:export-xdpi="65.454544"
-   inkscape:export-ydpi="65.454544">
+   sodipodi:docname="icon-mono-dark.svg"
+   inkscape:export-filename="/home/jorge/emojione-picker-ubuntu/assets/icon-mono-dark-22.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs8" />
   <sodipodi:namedview
@@ -63,7 +63,7 @@
      r="8.3917198"
      cy="10.465481"
      cx="11"
-     style="fill:#ffd42a;fill-opacity:1" />
+     style="fill:#dfdbd2;fill-opacity:1" />
   <path
      id="path4145"
      d="m 15.475584,11.864102 c 0,1.806737 -1.486454,3.916136 -4.475584,3.916136 -2.98997,0 -4.4755842,-2.109399 -4.4755842,-3.916136 0,0 1.4853345,0 4.4755842,0 2.98913,0 4.475584,0 4.475584,0 z"
