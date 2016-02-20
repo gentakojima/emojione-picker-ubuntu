@@ -1,6 +1,6 @@
 # emojione-picker for Ubuntu
 
-Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04 running Unity and other desktop environments.
+Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity and other desktop environments.
 
 ![Image of Emoji-picker](https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.png)
 
@@ -10,7 +10,7 @@ This project is proudly using emoji data from the [Emoji One](http://emojione.co
 
 Installation is optional, but recommended to run the program at session startup easily. 
 
-### Ubuntu 14.04
+### Ubuntu 14.04, 15.10
 
 Just follow these simple steps:
 
