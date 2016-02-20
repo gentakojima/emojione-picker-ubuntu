@@ -1,5 +1,5 @@
 #!/bin/bash
-for SIZE in 16 22 24 ; do
+for SIZE in 16 22 24 32 48 64 ; do
 	xdg-icon-resource install --theme ubuntu-mono-dark --size ${SIZE} /usr/share/emojione-picker/assets/icon-mono-dark-${SIZE}.png emojione-picker
 	xdg-icon-resource install --theme ubuntu-mono-light --size ${SIZE} /usr/share/emojione-picker/assets/icon-mono-light-${SIZE}.png emojione-picker
 done

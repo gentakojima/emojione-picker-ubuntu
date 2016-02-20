@@ -1657,3 +1657,9 @@ Files: emojione-picker /usr/bin
   assets/icon-mono-light-22.png /usr/share/emojione-picker
   assets/icon-mono-light-24.png /usr/share/emojione-picker
   assets/icon-mono-dark-16.png /usr/share/emojione-picker
+  assets/icon-mono-dark-32.png /usr/share/emojione-picker
+  assets/icon-mono-light-32.png /usr/share/emojione-picker
+  assets/icon-mono-dark-48.png /usr/share/emojione-picker
+  assets/icon-mono-light-48.png /usr/share/emojione-picker
+  assets/icon-mono-light-64.png /usr/share/emojione-picker
+  assets/icon-mono-dark-64.png /usr/share/emojione-picker

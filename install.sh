@@ -9,7 +9,7 @@ uninstall_emojionepicker(){
 	rm -f $_AUTOSTART_DIR/emojione-picker_autostart.desktop
 	rm -rf $_INSTALL_PREFIX/share/emojione-picker
 	# Uninstall icons
-	for SIZE in 16 22 24 ; do
+	for SIZE in 16 22 24 32 48 64 ; do
 		xdg-icon-resource uninstall --theme ubuntu-mono-dark --size ${SIZE} emojione-picker
 		xdg-icon-resource uninstall --theme ubuntu-mono-light --size ${SIZE} emojione-picker
 	done
@@ -26,7 +26,7 @@ install_emojionepicker(){
 	cp -rf assets $_INSTALL_PREFIX/share/emojione-picker/
 	sed -i $_AUTOSTART_DIR/emojione-picker_autostart.desktop -e "s*/usr*$_INSTALL_PREFIX*g"
 	# Install icons
-	for SIZE in 16 22 24 ; do
+	for SIZE in 16 22 24 32 48 64 ; do
 		xdg-icon-resource install --theme ubuntu-mono-dark --size ${SIZE} assets/icon-mono-dark-${SIZE}.png emojione-picker
 		xdg-icon-resource install --theme ubuntu-mono-light --size ${SIZE} assets/icon-mono-light-${SIZE}.png emojione-picker
 	done
