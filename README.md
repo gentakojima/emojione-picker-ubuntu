@@ -1,6 +1,6 @@
-# emojione-picker for Ubuntu
+# Emojione Picker for Ubuntu
 
-Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity and other desktop environments.
+Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity and some other GNU/Linux distributions and desktop environments.
 
 ![Image of Emoji-picker](https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.png)
 
@@ -12,7 +12,7 @@ Installation is optional, but recommended to run the program at session startup 
 
 ### Ubuntu 14.04, 15.10
 
-Just follow these simple steps:
+This method requires root access. If you can't be root, go for the standalone installer. Just follow these simple steps:
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
   2. Build the package: `equivs-build debian_package.ctl`
@@ -20,6 +20,8 @@ Just follow these simple steps:
   4. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
 ### Standalone installer (should work on any distro!)
+
+This method does not require root access. If you run it as root, the picker will be installed for all users.
 
   1. Just run `./install.sh`
   2. If you want to uninstall it later, just issue the `./install.sh` again.
@@ -49,9 +51,9 @@ Emojis are licensed by the great people of [Emoji One](http://emojione.com/) und
 
 ### Why for Ubuntu only? Does this work with KDE and other distros?
 
-Of course, but it was designed to work with the Unity desktop. It's been reported to work in Cinnamon, XFCE, Openbox, Gnome and KDE. 
+Of course, but it was designed to work with the Unity desktop. It's been reported to work with Cinnamon, XFCE, Openbox (with Stalonetray and Tint2), Gnome Shell and KDE. 
 
-Unfortunately, Cinnamon won't show the content of submenus if the total height is bigger than the screen height.
+Unfortunately, Cinnamon implementation won't show the content of submenus if the total height is bigger than the screen height.
 
 ### When I paste all/some icons, they are shown as ugly boxes. I want my money back!
 
