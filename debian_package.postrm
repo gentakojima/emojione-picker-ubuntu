@@ -1,0 +1,6 @@
+#!/bin/bash
+for SIZE in 16 22 24 ; do
+	xdg-icon-resource uninstall --theme ubuntu-mono-dark --size ${SIZE} emojione-picker
+	xdg-icon-resource uninstall --theme ubuntu-mono-light --size ${SIZE} emojione-picker
+done
+

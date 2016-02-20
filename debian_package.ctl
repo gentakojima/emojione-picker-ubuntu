@@ -9,6 +9,9 @@ Version: 0.1
 Maintainer: Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
 Depends: python-gi (>=3.2), python (>=2.7), python (<<2.8), python-pil (>=2.3.0) | python-imaging (>=1.1.7), python-notify (>=0.1), gir1.2-notify-0.7, gir1.2-appindicator3-0.1, gir1.2-rsvg-2.0
 
+PostInst: debian_package.postinst
+PostRm: debian_package.postrm
+
 Architecture: all
 Files: emojione-picker /usr/bin
   emojione-picker_autostart.desktop /etc/xdg/autostart
@@ -1648,3 +1651,9 @@ Files: emojione-picker /usr/bin
   assets/emoji.json /usr/share/emojione-picker
   assets/groups.json /usr/share/emojione-picker
   assets/icon.svg /usr/share/emojione-picker
+  assets/icon-mono-dark-22.png /usr/share/emojione-picker
+  assets/icon-mono-light-16.png /usr/share/emojione-picker
+  assets/icon-mono-dark-24.png /usr/share/emojione-picker
+  assets/icon-mono-light-22.png /usr/share/emojione-picker
+  assets/icon-mono-light-24.png /usr/share/emojione-picker
+  assets/icon-mono-dark-16.png /usr/share/emojione-picker
