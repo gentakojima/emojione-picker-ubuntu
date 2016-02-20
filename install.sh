@@ -32,6 +32,8 @@ install_emojionepicker(){
 	done
 }
 
+cd "${0%/*}"
+
 if [ "$(id -u)" != "0" ]; then
 	echo "Since you are running this as plain user, the program will be installed just for the current user."
 	_INSTALL_PREFIX=~/.local
