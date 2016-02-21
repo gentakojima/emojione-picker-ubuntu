@@ -245,7 +245,6 @@ if __name__ == "__main__":
     signals = {}
     for category in categories:
         for key in sorted_data:
-            sorted_data[key]["unicode"] in lowend
             if settings["lowend"] == False or not sorted_data[key]["unicode"] in lowend:
                 if sorted_data[key]["category"] == category:
                     emoji_group = get_emoji_group(sorted_data[key]["unicode"])
