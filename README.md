@@ -34,7 +34,7 @@ If you want to manually run it now, just press `Alt+F2` and write the command `e
 
 ## Troubleshooting issues
 
-The indicator might take some time to display on older systems. It usually takes 3 to 5 seconds, but as stated on issue #3, it can take up to 30 seconds, so be patient.
+The indicator usually takes 3 to 5 seconds to load, but it can take up to 30 seconds in older computers. In *Settings*, enable the option *Low end computer mode* to reduce the number of menu items (and emojis). That should speed up loading time. Currently, this mode shows about 1100 emojis out of 1700, but I intend to lower that to about 900 in the future.
 
 ## How to use it
 
