@@ -1650,6 +1650,8 @@ Files: emojione-picker /usr/bin
   assets/categories/nature.svg /usr/share/emojione-picker
   assets/emoji.json /usr/share/emojione-picker
   assets/groups.json /usr/share/emojione-picker
+  assets/lowend.json /usr/share/emojione-picker
+  assets/settings.glade /usr/share/emojione-picker
   assets/icon.svg /usr/share/emojione-picker
   assets/icon-mono-dark-22.png /usr/share/emojione-picker
   assets/icon-mono-light-16.png /usr/share/emojione-picker
