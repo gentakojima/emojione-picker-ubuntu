@@ -290,7 +290,7 @@ if __name__ == "__main__":
                             signals[key] = items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[key])
                         else:
                             # Toned emoji
-                            if settings["toned"]==-1:
+                            if settings["toned"] == -1 and settings["lowend"] == False:
                                 # Show all toned emojis in a submenu
                                 original_key = key
                                 chars = sorted_data[key]["unicode"].split("-")
