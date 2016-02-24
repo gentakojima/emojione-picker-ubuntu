@@ -32,10 +32,11 @@ categories = ["recent", "people", "foods", "nature", "objects", "activity", "tra
 recenticons = OrderedDict()
 
 # Settings handling
-settings = { 
+default_settings = settings = { 
     "toned": -1,
     "notifications": True,
-    "lowend": False
+    "lowend": False,
+    "recent": 20
 }
 configpath = expanduser("~") + "/.config/emojione-picker"
 os.path.isdir(configpath) or os.mkdir(configpath)
@@ -52,6 +53,7 @@ def open_settings_window(self, w):
     builder.get_object("combo_toned").set_active(settings["toned"]+1)
     builder.get_object("check_notifications").set_active(settings["notifications"])
     builder.get_object("check_lowend").set_active(settings["lowend"])
+    builder.get_object("recent").set_value(settings["recent"])
 
 class SettingsButtonHandler:
     def onButtonPressed(self, button):
@@ -64,7 +66,8 @@ def apply_settings():
     settings = { 
         "toned": builder.get_object("combo_toned").get_active()-1,
         "notifications": builder.get_object("check_notifications").get_active(),
-        "lowend": builder.get_object("check_lowend").get_active()
+        "lowend": builder.get_object("check_lowend").get_active(),
+	"recent": builder.get_object("recent").get_value_as_int()
     }
     # Save settings to file
     save_settings()
@@ -87,6 +90,10 @@ if os.path.isfile(configfile):
       
 else:
     save_settings()
+
+for k in default_settings.keys():
+    if not k in settings:
+        settings[k] = default_settings[k]
   
 # Load recent emojis at startup
 recentfile = configpath + "/recent.json"
@@ -96,7 +103,8 @@ if os.path.isfile(recentfile):
   recentindex = 0
   for k in recent.keys():
       if(int(recent[k]["recent_order"])>recentindex):
-          recentindex = int(recent[k]["recent_order"])+1
+          recentindex = int(recent[k]["recent_order"])
+  recentindex += 1
 else:
   recent = dict()
   recentindex = 0
@@ -122,12 +130,16 @@ def refresh_recent_submenu():
     # Refresh icons
     i = 0
     for key in sorted_recent:
+        if i >= settings["recent"]:
+            break
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
         img = Gtk.Image.new_from_pixbuf(pixbuf)
         recent_items[i].set_image(img)
         recent_items[i].set_label(sorted_recent[key]["name"].title())
         recent_items[i].show()
-        recent_items[i].connect("activate", item_response, sorted_recent[key])
+        if ("recent_" + str(i)) in signals.keys():
+            recent_items[i].disconnect(signals["recent_" + str(i)])
+        signals["recent_" + str(i)] = recent_items[i].connect("activate", item_response, sorted_recent[key])
         i = i + 1
 
 # Click response
@@ -159,19 +171,28 @@ def item_response(self, w):
     except ValueError:
         pass
 
-    # Remove oldest item if recent is too big
-    if len(recent)>=recent_items_maxno:
-        smallestindex = float("inf")
-        for k in recent.keys():
-            if(recent[k]["recent_order"]<smallestindex):
-                smallestindex = recent[k]["recent_order"]
-                keytodelete = k
-        del recent[keytodelete]
-
     # Store item on recent
     w["recent_order"] = recentindex
-    recentindex=recentindex+1
+    recentindex = recentindex + 1
     recent.update({w["emoji_order"]:w})
+
+    # Remove older items if recent is too big
+    if len(recent) > settings["recent"]:
+        biggestindex = 0
+        for k in recent.keys():
+            if recent[k]["recent_order"] > biggestindex:
+                biggestindex = recent[k]["recent_order"]
+	nextbiggest = biggestindex
+        for i in range (1, settings["recent"]):
+            nextbiggest_candidate = 0
+            for k in recent.keys():
+                if recent[k]["recent_order"] < nextbiggest and recent[k]["recent_order"] > nextbiggest_candidate:
+                    nextbiggest_candidate = recent[k]["recent_order"]
+            nextbiggest = nextbiggest_candidate
+        minindex = nextbiggest
+        for k in recent.keys():
+            if recent[k]["recent_order"] < minindex:
+                del recent[k]
 
     # Save recentfile
     with open(recentfile, 'w') as outfile:
@@ -352,8 +373,7 @@ if __name__ == "__main__":
                                 
     # Load icons into recent category
     recent_items = []
-    recent_items_maxno = 20
-    for i in range (0, recent_items_maxno):
+    for i in range (0, settings["recent"]):
         recent_items.append( Gtk.ImageMenuItem())
         item_settings = recent_items[i].get_settings()
         item_settings.set_property('gtk-menu-images', True)
