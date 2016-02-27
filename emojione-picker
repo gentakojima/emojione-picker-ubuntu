@@ -18,6 +18,8 @@ sys.setdefaultencoding('utf8')
 
 # Import GTK
 from gi.repository import GLib, Gtk, GObject, Gdk, Notify, GdkPixbuf
+from gi import require_version
+require_version('AppIndicator3', '0.1')
 from gi.repository import AppIndicator3 as appindicator
 
 # Where is the data?
