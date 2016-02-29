@@ -1,6 +1,6 @@
 # Emojione Picker for Ubuntu
 
-Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity and some other GNU/Linux distributions and desktop environments.
+Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity 7 and some other GNU/Linux distributions and desktop environments.
 
 ![Image of Emoji-picker](https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.png)
 
@@ -10,16 +10,18 @@ This project is proudly using emoji data from the [Emoji One](http://emojione.co
 
 Installation is optional, but recommended to run the program at session startup easily. 
 
-### Ubuntu 14.04, 15.10
+### Method 1: Build a Debian Package
 
-This method requires root access. If you can't be root, go for the standalone installer. Just follow these simple steps:
+This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04. If you can't become root, use other method.
+
+Are you still here? Good. So just follow these simple steps:
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
   2. Build the package: `equivs-build debian_package.ctl`
   3. Install it! `sudo dpkg -i emojione-picker*.deb`
   4. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
-### Standalone installer (should work on any distro!)
+### Method 2: Standalone installer (should work on any distro!)
 
 This method does not require root access. If you run it as root, the picker will be installed for all users.
 
@@ -28,9 +30,9 @@ This method does not require root access. If you run it as root, the picker will
 
 ## How to run it
 
-If you installed it, the picker should be started on a new session start. Just close your current session, and start it again.
+If you installed it, the picker should be started on a fresh session start. Just close your current session, and start it again.
 
-If you want to manually run it now, just press `Alt+F2` and write the command `emojione-picker`. If you used the standalone installer and installed it just for the current user, you might need to specify the path to the program, that is `~/.local/bin/emojione-picker`.
+If you want to manually run it right now, just press `Alt+F2` and write the command `emojione-picker`. If you used the standalone installer and installed it just for the current user, you might need to specify the path to the program, that is `~/.local/bin/emojione-picker`.
 
 ## Troubleshooting issues
 
@@ -57,6 +59,6 @@ Unfortunately, Cinnamon implementation won't show the content of submenus if the
 
 ### When I paste all/some icons, they are shown as ugly boxes. I want my money back!
 
-Even if *you*  can't see the emojis once pasted, they are still there for other people to see. So even if your system can't display it, it will still work for communication with others.
+Recent GNU/Linux distributions (including Ubuntu 14.04, 15.10) won't display emojis properly. Supporting full color emojis in text will take some work, and will be probably ready in the near future, but it's still not ready for everybody. Good news is that, even if you can't see them properly, the emojis are still there and others will see them.
 
-If you still want to see the emojis there are some workarounds to display them in black and white, but full color support will probably take some time. Please take a look at [this guide](http://www.omgubuntu.co.uk/2014/11/see-install-use-emoji-symbols-ubuntu-linux).
+Most emojis are displayed in Ubuntu 16.04, but only in black and white. To apply the same solution to older distributions, take a look at [this guide](http://www.omgubuntu.co.uk/2014/11/see-install-use-emoji-symbols-ubuntu-linux).
