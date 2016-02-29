@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
+<interface>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkListStore" id="iconstore">
+    <columns>
+      <!-- column-name icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name unicode -->
+      <column type="gchararray"/>
+      <!-- column-name text -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="search_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Search Emoji...</property>
+    <property name="resizable">False</property>
+    <property name="window_position">mouse</property>
+    <property name="type_hint">popup-menu</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="urgency_hint">True</property>
+    <property name="decorated">False</property>
+    <property name="has_resize_grip">False</property>
+    <signal name="focus-out-event" handler="onOutFocus" swapped="no"/>
+    <signal name="key-release-event" handler="onKeyReleased" swapped="no"/>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkSearchEntry" id="search">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="primary_icon_name">edit-find-symbolic</property>
+            <property name="primary_icon_activatable">False</property>
+            <property name="primary_icon_sensitive">False</property>
+            <signal name="search-changed" handler="onSearchChanged" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkIconView" id="iconview">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="margin">3</property>
+            <property name="item_orientation">horizontal</property>
+            <property name="model">iconstore</property>
+            <property name="columns">8</property>
+            <property name="row_spacing">3</property>
+            <property name="column_spacing">3</property>
+            <property name="tooltip_column">2</property>
+            <property name="item_padding">3</property>
+            <property name="activate_on_single_click">True</property>
+            <signal name="item-activated" handler="onIconActivated" swapped="no"/>
+            <child>
+              <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+              <attributes>
+                <attribute name="pixbuf">0</attribute>
+              </attributes>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

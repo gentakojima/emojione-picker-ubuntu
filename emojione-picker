@@ -83,6 +83,77 @@ def save_settings():
     with open(configfile, 'w') as outfile:
         json.dump(settings, outfile)
 
+# Search feature
+searchbuilder = Gtk.Builder()
+def open_search_window(self, w):
+    searchbuilder.add_from_file(directory + "/assets/chooser.glade")
+    searchbuilder.connect_signals(SearchHandler())
+    search_window = searchbuilder.get_object("search_window")
+    search_window.show_all()
+    search_window.present()
+    
+    # Put recent icons by default
+    iconstore = searchbuilder.get_object("iconstore")
+    global sorted_recent, searchresults
+    for i in sorted_recent:
+        emoji_name = sorted_recent[i]["name"]
+        emoji_image = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[i]["unicode"] + ".svg", 24, 24)
+        emoji_code = sorted_recent[i]["unicode"]
+        iconstore.append([emoji_image, emoji_code, emoji_name])
+    searchresults = []
+    for i in sorted_recent.keys():
+        searchresults.append(sorted_recent[i])
+    return
+
+searchresults = None
+class SearchHandler:
+    def onSearchChanged(self, search):
+        global searchresults
+        search = searchbuilder.get_object("search").get_text()
+        iconstore = searchbuilder.get_object("iconstore")
+        iconstore.clear()
+        if search == "":
+            # No search? Put recent icons
+            global sorted_recent
+            for i in sorted_recent:
+                emoji_name = sorted_recent[i]["name"]
+                emoji_image = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[i]["unicode"] + ".svg", 24, 24)
+                emoji_code = sorted_recent[i]["unicode"]
+                iconstore.append([emoji_image, emoji_code, emoji_name])
+            searchresults = []
+            for i in sorted_recent.keys():
+                searchresults.append(sorted_recent[i])
+            return
+        numfound=0
+        searchresults = []
+        for i in sorted_data:
+            match = False
+            for keyword in sorted_data[i]["keywords"]:
+                if keyword.find(search)>-1:
+                    match = True
+            if sorted_data[i]["name"].find(search)>-1:
+                match = True
+            if match == True:
+                numfound += 1
+                if numfound > 50:
+                    return
+                searchresults.append(sorted_data[i])
+                emoji_name = sorted_data[i]["name"]
+                emoji_image = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[i]["unicode"] + ".svg", 24, 24)
+                emoji_code = sorted_data[i]["unicode"]
+                iconstore.append([emoji_image, emoji_code, emoji_name])
+    def onIconActivated(self, icon, index):
+        global searchresults
+        item_response(self, searchresults[int(index.to_string())])
+        icon.get_parent_window().destroy()
+    def onKeyReleased(self, window, event):
+        if event.keyval == Gdk.KEY_Escape:
+            window.destroy()
+        elif event.keyval == Gdk.KEY_Down:
+            searchbuilder.get_object("iconview").grab_focus()
+    def onOutFocus(self, window, data):
+        window.destroy()
+
 # Load settings at startup
 configfile = configpath + "/settings.json"
 if os.path.isfile(configfile):
@@ -121,8 +192,9 @@ if settings["lowend"] == True:
             lowend = json.load(lowend_json_file)
 
 # Refresh recent icons submenu
+sorted_recent = None
 def refresh_recent_submenu():
-    global recent, recent_items
+    global recent, recent_items, sorted_recent
 
     # Rearrange data
     def orderfunc(tup):
@@ -151,8 +223,11 @@ def item_response(self, w):
     global recentindex, recent
 
     # If this is a toned item with submenu, do nothing
-    if self.get_submenu() != None:
-        return
+    try:
+        if self.get_submenu() != None:
+            return
+    except AttributeError:
+        pass
 
     # Copy character to clipboard
     chars = w["unicode"].split("-")
@@ -389,12 +464,20 @@ if __name__ == "__main__":
         GLib.idle_add(menu.append, category_item[category])
         GLib.idle_add(category_item[category].show)
 
-    # Create settings item
+    # Create separator
     separator = Gtk.SeparatorMenuItem()
-    settings_item = Gtk.MenuItem("Settings")
     GLib.idle_add(menu.append,separator)
-    GLib.idle_add(menu.append,settings_item)
     GLib.idle_add(separator.show)
+
+    # Create search item
+    search_item = Gtk.MenuItem("Search Emoji")
+    GLib.idle_add(menu.append,search_item)
+    GLib.idle_add(search_item.show)
+    search_item.connect("activate", open_search_window, "Search")
+
+    # Create settings item
+    settings_item = Gtk.MenuItem("Settings...")
+    GLib.idle_add(menu.append,settings_item)
     GLib.idle_add(settings_item.show)    
     settings_item.connect("activate", open_settings_window, "Settings")
 
