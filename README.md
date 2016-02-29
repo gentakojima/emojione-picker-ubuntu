@@ -2,7 +2,10 @@
 
 Emojione-picker-Ubuntu is a simple emoji picker for Ubuntu 14.04+ running Unity 7 and some other GNU/Linux distributions and desktop environments.
 
-![Image of Emoji-picker](https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.png)
+<video autoplay poster="https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.png">
+  <source src="https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.webm" type="video/webm" />
+  <source src="https://raw.githubusercontent.com/gentakojima/emojione-picker-ubuntu/master/screenshot.mp4" type="video/mp4" />
+</video>
 
 This project is proudly using emoji data from the [Emoji One](http://emojione.com/) project.
 
