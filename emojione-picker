@@ -33,7 +33,6 @@ for d in directories:
 
 # Categories definitions
 categories = ["recent", "people", "foods", "nature", "objects", "activity", "travel", "flags", "symbols"]
-recenticons = OrderedDict()
 
 # Settings handling
 default_settings = settings = { 
@@ -48,7 +47,7 @@ os.path.isdir(configpath) or os.mkdir(configpath)
 builder = Gtk.Builder()
 def open_settings_window(self, w):
     global settings
-    builder.add_from_file(directory + "/assets/settings.glade") # FIXME put correct path
+    builder.add_from_file(directory + "/assets/settings.glade")
     builder.connect_signals(SettingsButtonHandler())
     settings_window = builder.get_object("settings_window")
     settings_window.show_all()
