@@ -65,7 +65,7 @@
     "icon":"1f37a"
   },
   "buildings": {
-    "unicodes":["1f3d8","1f3f0","1f3ef","1f3df","1f5fd","1f3e0","1f3e1","1f3da","1f3e2","1f3ec","1f3e3","1f3e4","1f3e5","1f3e6","1f3e8","1f3ea","1f3eb","1f3e9","1f492","1f3db","26ea","1f54c","1f54d","1f54b","26e9"],
+    "unicodes":["1f3d8","1f3f0","1f3ef","1f3df","1f5fd","1f3e0","1f3e1","1f3da","1f3e2","1f3ec","1f3e3","1f3e4","1f3e5","1f3e6","1f3e8","1f3ea","1f3eb","1f3e9","1f492","1f3db","26ea","1f54c","1f54d","1f54b","26e9","1f5fc"],
     "name":"buildings",
     "icon":"1f3d8"
   },
