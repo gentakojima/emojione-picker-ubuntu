@@ -1,0 +1,18 @@
+Source: emojione-picker
+Section: python
+Priority: optional
+Homepage: https://github.com/gentakojima/emojione-picker-ubuntu
+Standards-Version: 3.9.5
+X-Python-Version: << 2.8
+Build-Depends: debhelper (>= 7), python (<<2.8)
+Maintainer: Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
+
+
+Package: emojione-picker
+Section: python
+Depends: python-gi (>=3.2), python2.7, python-notify (>=0.1), gir1.2-notify-0.7, gir1.2-appindicator3-0.1, gir1.2-rsvg-2.0
+Architecture: all
+Description: Emoji Picker for the indicator area using Emoji One
+ Emoji Picker featuring several menus and a search panel.
+ .
+ You must paste the emojis wherever you want to use them.

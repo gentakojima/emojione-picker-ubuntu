@@ -1,0 +1,14 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: emojione-picker-ubuntu
+Upstream-Contact: Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
+
+Files: *
+Copyright: 2016 Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
+License: GPL-3
+  /usr/share/common-licenses/GPL-4
+
+Files: assets/svg/*, assets/categories/*, assets/emoji.json
+Copyright: 2016 Emoji One <http://www.emojione.com>
+License: CC-By-4.0
+  https://creativecommons.org/licenses/by/4.0/legalcode
+
