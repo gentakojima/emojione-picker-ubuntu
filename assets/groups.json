@@ -154,7 +154,7 @@
     "icon":"3299"
   },
   "facilities": {
-    "unicodes":["24c2","1f3e7","1f6c2","1f6c3","1f6c4","1f6c5","267f","1f6be","1f17f","1f6b0","1f6b9","1f6ba","1f6bc","1f6bb","1f6ae","1f3a6","1f4f6","2139","1f533"],
+    "unicodes":["24c2","1f3e7","1f6c2","1f6c3","1f6c4","1f6c5","267f","1f6be","1f17f","1f6b0","1f6b9","1f6ba","1f6bc","1f6bb","1f6ae","1f3a6","1f4f6","2139"],
     "name":"facilities",
     "icon":"1f6be"
   },
@@ -169,7 +169,7 @@
     "icon":"1f522"
   },
   "circlesdiamondssquares": {
-    "unicodes":["26aa","26ab","1f534","1f535","1f538","1f539","1f536","1f537","1f53a","25aa","25ab","2b1b","2b1c","1f53b","25fc","25fb","25fe","25fd","1f532"],
+    "unicodes":["26aa","26ab","1f534","1f535","1f538","1f539","1f536","1f537","1f53a","25aa","25ab","2b1b","2b1c","1f53b","25fc","25fb","25fe","25fd","1f532","1f533"],
     "name":"circles, diamonds and squares",
     "icon":"1f536"
   },
