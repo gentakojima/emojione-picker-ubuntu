@@ -1652,6 +1652,7 @@ Files: emojione-picker /usr/bin
   assets/groups.json /usr/share/emojione-picker
   assets/lowend.json /usr/share/emojione-picker
   assets/settings.glade /usr/share/emojione-picker
+  assets/chooser.glade /usr/share/emojione-picker
   assets/icon.svg /usr/share/emojione-picker
   assets/icon-mono-dark-22.png /usr/share/emojione-picker
   assets/icon-mono-light-16.png /usr/share/emojione-picker
