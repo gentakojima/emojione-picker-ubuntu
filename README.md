@@ -12,7 +12,7 @@ Installation is optional, but recommended to run the program at session startup 
 
 ### Method 1: Install Debian Package from PPA
 
-This method requires root access and is only available for Ubuntu 14.04 at this moment.
+This method requires root access and is only available for Ubuntu 14.04, 15.10 and 16.04 at this moment.
 
   1. Add Official PPA: `sudo add-apt-repository ppa:ys/emojione-picker`
   2. Reload package indexes: `sudo apt-get update`
@@ -20,7 +20,7 @@ This method requires root access and is only available for Ubuntu 14.04 at this 
 
 ### Method 2: Build a Debian Package from source
 
-This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04.
+This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04, but should work on any Debian-based distribution.
 
   1. Install dependencies: `sudo apt-get python27 python-dev-all build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
   2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
