@@ -10,18 +10,32 @@ This project is proudly using emoji data from the [Emoji One](http://emojione.co
 
 Installation is optional, but recommended to run the program at session startup easily. 
 
-### Method 1: Build a Debian Package
+### Method 1: Install Debian Package from PPA
 
-This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04. If you can't become root, use other method.
+This method requires root access and is only available for Ubuntu 14.04 at this moment.
 
-Are you still here? Good. So just follow these simple steps:
+  1. Add Official PPA: `sudo add-apt-repository ppa:ys/emojione-picker`
+  2. Reload package indexes: `sudo apt-get update`
+  3. Install package: `sudo apt-get install emojione-picker`
+
+### Method 2: Build a Debian Package from source
+
+This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04.
+
+  1. Install dependencies: `sudo apt-get python27 python-dev-all build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
+  2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  3. Build the package: `cd emojione-picker-ubuntu; debuild` (*Signing the package might fail at this point, but it's not a big deal*)
+  4. Install it! `sudo dpkg -i ../emojione-picker*.deb`
+
+Alternatively, you can use these old instructions to build the package with equivs. This will be removed soon:
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
-  2. Build the package: `equivs-build debian_package.ctl`
-  3. Install it! `sudo dpkg -i emojione-picker*.deb`
-  4. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
+  2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  3. Build the package: `cd emojione-picker-ubuntu; equivs-build debian_package.ctl`
+  4. Install it! `sudo dpkg -i emojione-picker*.deb`
+  5. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
-### Method 2: Standalone installer (should work on any distro!)
+### Method 3: Standalone installer (should work on any distro!)
 
 This method does not require root access. If you run it as root, the picker will be installed for all users.
 
