@@ -94,9 +94,9 @@
     "name":"landscapes",
     "icon":"26fa"
   },
-  "aircrafts": {
+  "aircraft": {
     "unicodes":["1f6e9","2708","1f6eb","1f6ec","1f681"],
-    "name":"aircrafts",
+    "name":"aircraft",
     "icon":"2708"
   },
   "trains": {
