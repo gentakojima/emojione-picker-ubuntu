@@ -24,23 +24,27 @@ This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 
 
   1. Install dependencies: `sudo apt-get install python-27 python-all-dev build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
   2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
-  3. Build the package: `cd emojione-picker-ubuntu; debuild` (*Signing the package might fail at this point, but it's not a big deal*)
-  4. Install it! `sudo dpkg -i ../emojione-picker*.deb`
+  3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
+  4. Build the package: `cd emojione-picker-ubuntu; debuild` (*Signing the package might fail at this point, but it's not a big deal*)
+  5. Install it! `sudo dpkg -i ../emojione-picker*.deb`
 
 Alternatively, you can use these old instructions to build the package with equivs. This will be removed soon:
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
   2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
-  3. Build the package: `cd emojione-picker-ubuntu; equivs-build debian_package.ctl`
-  4. Install it! `sudo dpkg -i emojione-picker*.deb`
-  5. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
+  3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
+  4. Build the package: `cd emojione-picker-ubuntu; equivs-build debian_package.ctl`
+  5. Install it! `sudo dpkg -i emojione-picker*.deb`
+  6. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
 ### Method 3: Standalone installer (should work on any distro!)
 
 This method does not require root access. If you run it as root, the picker will be installed for all users.
 
-  1. Just run `./install.sh`
-  2. If you want to uninstall it later, just issue the `./install.sh` again.
+  1. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  2. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
+  3. Just run `./install.sh`
+  4. If you want to uninstall it later, just issue the `./install.sh` again.
 
 ## How to run it
 
@@ -67,7 +71,7 @@ Emojis are licensed by the great people of [Emoji One](http://emojione.com/) und
 
 ### Why for Ubuntu only? Does this work with KDE and other distros?
 
-Of course, but it was designed to work with the Unity desktop. It's been reported to work with Cinnamon, XFCE, Openbox (with Stalonetray and Tint2), Gnome Shell and KDE. 
+Of course, but it was designed to work with the Unity desktop. It's been reported to work with Cinnamon, XFCE, Openbox (with Stalonetray and Tint2), Gnome Shell, MATE and KDE. 
 
 Unfortunately, Cinnamon implementation won't show the content of submenus if the total height is bigger than the screen height.
 
