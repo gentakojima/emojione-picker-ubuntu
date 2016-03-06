@@ -79,5 +79,5 @@ Unfortunately, Cinnamon implementation won't show the content of submenus if the
 
 Recent GNU/Linux distributions (including Ubuntu 14.04, 15.10) won't display emojis properly out of the box.
 
-You can get full color emojis working on Firefox with black and white fallback for other applications following these instructions: (https://github.com/eosrei/emojione-color-font)
+You can get full color emojis working on Firefox with black and white fallback for other applications following these instructions: https://github.com/eosrei/emojione-color-font
 
