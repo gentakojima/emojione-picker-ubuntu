@@ -23,17 +23,17 @@ This method requires root access and is only available for Ubuntu 14.04, 15.10 a
 This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04, but should work on any Debian-based distribution.
 
   1. Install dependencies: `sudo apt-get install python-27 python-all-dev build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
-  2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  2. Clone the repository and cd into it: `git clone https://github.com/gentakojima/emojione-picker-ubuntu; cd emojione-picker-ubuntu`
   3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
-  4. Build the package: `cd emojione-picker-ubuntu; debuild` (*Signing the package might fail at this point, but it's not a big deal*)
+  4. Build the package: `debuild` (*Signing the package might fail at this point, but it's not a big deal*)
   5. Install it! `sudo dpkg -i ../emojione-picker*.deb`
 
 Alternatively, you can use these old instructions to build the package with equivs. This will be removed soon:
 
   1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
-  2. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  2. Clone the repository and cd into it: `git clone https://github.com/gentakojima/emojione-picker-ubuntu; cd emojione-picker-ubuntu`
   3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
-  4. Build the package: `cd emojione-picker-ubuntu; equivs-build debian_package.ctl`
+  4. Build the package: `equivs-build debian_package.ctl`
   5. Install it! `sudo dpkg -i emojione-picker*.deb`
   6. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
 
@@ -41,10 +41,10 @@ Alternatively, you can use these old instructions to build the package with equi
 
 This method does not require root access. If you run it as root, the picker will be installed for all users.
 
-  1. Clone the repository: `git clone https://github.com/gentakojima/emojione-picker-ubuntu`
+  1. Clone the repository and cd into it: `git clone https://github.com/gentakojima/emojione-picker-ubuntu; cd emojione-picker-ubuntu`
   2. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
-  3. Just run `./install.sh`
-  4. If you want to uninstall it later, just issue the `./install.sh` again.
+  3. Run `./install.sh`
+  4. If you want to uninstall it later, just run `./install.sh` again.
 
 ## How to run it
 
@@ -77,6 +77,7 @@ Unfortunately, Cinnamon implementation won't show the content of submenus if the
 
 ### When I paste all/some icons, they are shown as ugly boxes. I want my money back!
 
-Recent GNU/Linux distributions (including Ubuntu 14.04, 15.10) won't display emojis properly. Supporting full color emojis in text will take some work, and will be probably ready in the near future, but it's still not ready for everybody. Good news is that, even if you can't see them properly, the emojis are still there and others will see them.
+Recent GNU/Linux distributions (including Ubuntu 14.04, 15.10) won't display emojis properly out of the box.
 
-Most emojis are displayed in Ubuntu 16.04, but only in black and white. To apply the same solution to older distributions, take a look at [this guide](http://www.omgubuntu.co.uk/2014/11/see-install-use-emoji-symbols-ubuntu-linux).
+You can get full color emojis working on Firefox with black and white fallback for other applications following these instructions: (https://github.com/eosrei/emojione-color-font)
+
