@@ -45,6 +45,10 @@ configpath = expanduser("~") + "/.config/emojione-picker"
 os.path.isdir(configpath) or os.mkdir(configpath)
 
 builder = Gtk.Builder()
+
+def exit(self, w):
+    sys.exit()
+
 def open_settings_window(self, w):
     global settings
     builder.add_from_file(directory + "/assets/settings.glade")
@@ -481,6 +485,17 @@ if __name__ == "__main__":
     GLib.idle_add(menu.append,settings_item)
     GLib.idle_add(settings_item.show)    
     settings_item.connect("activate", open_settings_window, "Settings")
+    
+    # Create another separator
+    separator = Gtk.SeparatorMenuItem()
+    GLib.idle_add(menu.append,separator)
+    GLib.idle_add(separator.show)
+
+    # Create exit item
+    exit_item = Gtk.MenuItem("Exit")
+    GLib.idle_add(menu.append,exit_item)
+    GLib.idle_add(exit_item.show)
+    exit_item.connect("activate", exit, "Exit")
 
     # Associate menu with indicator
     ind.set_menu(menu)

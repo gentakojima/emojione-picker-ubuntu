@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Emojione Picker
+Comment=Emoji Picker for Ubuntu
+Icon=emojione-picker
+Exec=emojione-picker
+Terminal=false
+Type=Application
+NoDisplay=false
+
