@@ -3,9 +3,7 @@
 #
 
 import os
-import thread
 import sys
-from time import sleep
 import json
 from os.path import expanduser
 import signal
