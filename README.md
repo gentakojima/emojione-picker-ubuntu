@@ -28,15 +28,6 @@ This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 
   4. Build the package: `debuild` (*Signing the package might fail at this point, but it's not a big deal*)
   5. Install it! `sudo dpkg -i ../emojione-picker*.deb`
 
-Alternatively, you can use these old instructions to build the package with equivs. This will be removed soon:
-
-  1. Install equivs: `sudo apt-get install equivs`. Ok, don't judge me, I'm lazy.
-  2. Clone the repository and cd into it: `git clone https://github.com/gentakojima/emojione-picker-ubuntu; cd emojione-picker-ubuntu`
-  3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
-  4. Build the package: `equivs-build debian_package.ctl`
-  5. Install it! `sudo dpkg -i emojione-picker*.deb`
-  6. Probably don't needed, but this fixes your depencencies if you get an error in the previous step: `sudo apt-get -f install`
-
 ### Method 3: Standalone installer (should work on any distro!)
 
 This method does not require root access. If you run it as root, the picker will be installed for all users.
