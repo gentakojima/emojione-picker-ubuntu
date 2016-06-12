@@ -32,7 +32,7 @@ for d in directories:
         break
 
 # Categories definitions
-categories = ["recent", "people", "foods", "nature", "objects", "activity", "travel", "flags", "symbols"]
+categories = ["recent", "people", "food", "nature", "objects", "activity", "travel", "flags", "symbols"]
 
 # Settings handling
 default_settings = settings = { 
