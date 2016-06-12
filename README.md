@@ -62,7 +62,7 @@ Emojis are licensed by the great people of [Emoji One](http://emojione.com/) und
 
 ### Why for Ubuntu only? Does this work with KDE and other distros?
 
-Of course, but it was designed to work with the Unity desktop. It's been reported to work with Cinnamon, XFCE, Openbox (with Stalonetray and Tint2), Gnome Shell, MATE and KDE. 
+Of course, but it was designed to work with the Unity desktop. It's been reported to work with Cinnamon, XFCE, Openbox (with Stalonetray and Tint2), Gnome Shell, MATE and KDE.
 
 Unfortunately, Cinnamon implementation won't show the content of submenus if the total height is bigger than the screen height.
 
@@ -71,4 +71,10 @@ Unfortunately, Cinnamon implementation won't show the content of submenus if the
 Recent GNU/Linux distributions (including Ubuntu 14.04, 15.10) won't display emojis properly out of the box.
 
 You can get full color emojis working on Firefox with black and white fallback for other applications following these instructions: https://github.com/eosrei/emojione-color-font
+
+### I get "ValueError: Namespace AppIndicator3 not available" at startup
+
+You're missing the required python library. Please install the required package:
+  - Ubuntu: `gir1.2-appindicator3-0.1`
+  - OpenSuse Leap: `typelib-1_0-AppIndicator3-0_1`
 
