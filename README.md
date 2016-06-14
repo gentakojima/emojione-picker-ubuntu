@@ -22,7 +22,7 @@ This method requires root access and is only available for Ubuntu 14.04, 15.10 a
 
 This method requires root access and was only tested on Ubuntu 14.04, 15.10 and 16.04, but should work on any Debian-based distribution.
 
-  1. Install dependencies: `sudo apt-get install python-27 python-all-dev build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
+  1. Install dependencies: `sudo apt-get install python-2.7 python-all-dev build-essential python-notify gir1.2-notify-0.7 gir1.2-appindicator3-0.1 gir1.2-rsvg-2.0`
   2. Clone the repository and cd into it: `git clone https://github.com/gentakojima/emojione-picker-ubuntu; cd emojione-picker-ubuntu`
   3. Checkout the latest stable release. List the available releases: `git tag -l` and checkout, for example: `git checkout v0.1` (you can ignore this step to build the current development version instead, that may or may not work properly).
   4. Build the package: `debuild` (*Signing the package might fail at this point, but it's not a big deal*)
