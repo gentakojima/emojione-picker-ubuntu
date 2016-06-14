@@ -1,3 +1,12 @@
+emojione-picker (0.1~git20160614) trusty; urgency=medium
+
+  * Added Exit option.
+  * Added launcher for the dash.
+  * (Hopefully) fixed issues with the postinst.
+  * Updated EmojiOne to 2016 Q2 release (2.2).
+
+ -- Jorge Suárez de Lis <yo@jorgesuarezdelis.name>  Tue, 14 Jun 2016 23:25:01 +0200
+
 emojione-picker (0.1~git20160229) trusty; urgency=medium
 
   * Initial release.
