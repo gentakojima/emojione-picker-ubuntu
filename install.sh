@@ -15,6 +15,7 @@ uninstall_emojionepicker(){
 	for SIZE in 16 22 24 32 48 64 ; do
 		xdg-icon-resource uninstall --theme ubuntu-mono-dark --size ${SIZE} emojione-picker
 		xdg-icon-resource uninstall --theme ubuntu-mono-light --size ${SIZE} emojione-picker
+		xdg-icon-resource uninstall --theme default --size ${SIZE} emojione-picker
 	done
 }
 
@@ -33,6 +34,7 @@ install_emojionepicker(){
 	for SIZE in 16 22 24 32 48 64 ; do
 		xdg-icon-resource install --theme ubuntu-mono-dark --size ${SIZE} assets/icon-mono-dark-${SIZE}.png emojione-picker
 		xdg-icon-resource install --theme ubuntu-mono-light --size ${SIZE} assets/icon-mono-light-${SIZE}.png emojione-picker
+		xdg-icon-resource install --theme default --size ${SIZE} assets/icon-default-${SIZE}.png emojione-picker
 	done
     # Install desktop entry
     mkdir -p $_APP_DIR

@@ -1,7 +1,6 @@
 emojione-picker /usr/bin
 emojione-picker_autostart.desktop /etc/xdg/autostart
 emojione-picker.desktop /usr/share/applications
-assets/svg/ /usr/share/emojione-picker/assets/svg
 assets/svg/1f1f7.svg /usr/share/emojione-picker/assets/svg
 assets/svg/1f1ed-1f1f2.svg /usr/share/emojione-picker/assets/svg
 assets/svg/1f684.svg /usr/share/emojione-picker/assets/svg
@@ -1854,7 +1853,13 @@ assets/groups.json /usr/share/emojione-picker/assets
 assets/lowend.json /usr/share/emojione-picker/assets
 assets/settings.glade /usr/share/emojione-picker/assets
 assets/chooser.glade /usr/share/emojione-picker/assets
-assets/icon.svg /usr/share/emojione-picker/assets
+assets/icon-default.svg /usr/share/emojione-picker/assets
+assets/icon-default-16.png /usr/share/emojione-picker/assets
+assets/icon-default-22.png /usr/share/emojione-picker/assets
+assets/icon-default-24.png /usr/share/emojione-picker/assets
+assets/icon-default-32.png /usr/share/emojione-picker/assets
+assets/icon-default-48.png /usr/share/emojione-picker/assets
+assets/icon-default-64.png /usr/share/emojione-picker/assets
 assets/icon-mono-dark-22.png /usr/share/emojione-picker/assets
 assets/icon-mono-light-16.png /usr/share/emojione-picker/assets
 assets/icon-mono-dark-24.png /usr/share/emojione-picker/assets

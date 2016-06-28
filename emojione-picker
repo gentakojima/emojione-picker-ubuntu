@@ -300,7 +300,7 @@ if __name__ == "__main__":
     menu = Gtk.Menu()
 
     # Create indicator
-    ind = appindicator.Indicator.new("emojione-picker", directory + "/assets/icon.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
+    ind = appindicator.Indicator.new("emojione-picker", directory + "/assets/icon-default.svg", appindicator.IndicatorCategory.APPLICATION_STATUS)
     ind.set_status(appindicator.IndicatorStatus.ACTIVE)
 
     # If there is a icon present in the theme, use it!
