@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Emojione Picker
 Comment=Emoji Picker for Ubuntu
-Icon=/usr/share/emojione-picker/assets/icon.svg
-Exec=/usr/bin/emojione-picker
+Icon=emojione-picker
+Exec=emojione-picker
 Terminal=false
 Type=Application
 NoDisplay=false
