@@ -14,7 +14,7 @@ Installation is optional, but recommended to run the program at session startup 
 
 This method requires root access and is only available for Ubuntu 14.04, 15.10 and 16.04 at this moment.
 
-  1. Add Official PPA: `sudo add-apt-repository ppa:ys/emojione-picker`
+  1. Add [Official PPA](https://launchpad.net/~ys/+archive/ubuntu/emojione-picker): `sudo add-apt-repository ppa:ys/emojione-picker`
   2. Reload package indexes: `sudo apt-get update`
   3. Install package: `sudo apt-get install emojione-picker`
 
