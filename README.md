@@ -43,8 +43,6 @@ If you installed it, the picker should be started on a fresh session start. Just
 
 If you want to manually run it right now, just press `Alt+F2` and write the command `emojione-picker`. If you used the standalone installer and installed it just for the current user, you might need to specify the path to the program, that is `~/.local/bin/emojione-picker`.
 
-To open the emoji search window at any time, just run `emojione-picker` again. You can assign a global hotkey to the command `emojione-picker` and the search window will open just on your current mouse position.
-
 ## Troubleshooting issues
 
 The indicator usually takes 3 to 5 seconds to load, but it can take up to 30 seconds in older computers. In *Settings*, enable the option *Low end computer mode* to reduce the number of menu items (and emojis). That should speed up loading time. Currently, this mode shows about 1100 emojis out of 1700, but I intend to lower that to about 900 in the future.
@@ -53,8 +51,14 @@ The **emoji search window** can be pleace under the current active window, due t
 
 ## How to use it
 
+To use the picker:
+
   1. Choose your emoji from the dropdown menu.
   2. Paste it (usually `Ctrl+V`) wherever you want!
+
+You can also enable the **experimental** option to type the emoji instead of using the clipboard in the Settings. If you are interested in this option, please let me know if this is working for you.
+
+The **emoji search window** let you search emojis writing keywords. You can also assign a global hotkey to the command `emojione-picker` and the search window will open on your current mouse position at any time.
 
 ## License
 
