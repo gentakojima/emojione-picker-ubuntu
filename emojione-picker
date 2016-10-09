@@ -141,6 +141,7 @@ def open_search_window(self, w):
     return
 
 searchresults = None
+selectionChanged = False
 class SearchHandler:
     def onSearchChanged(self, search):
         global searchresults
@@ -181,11 +182,18 @@ class SearchHandler:
         global searchresults
         item_response(self, searchresults[int(index.to_string())])
         icon.get_parent_window().hide()
+    def onSelectionChanged(self, data):
+        global selectionChanged
+        selectionChanged = True
     def onKeyReleased(self, window, event):
+        global selectionChanged
         if event.keyval == Gdk.KEY_Escape:
             window.hide()
         elif event.keyval == Gdk.KEY_Down:
             searchbuilder.get_object("iconview").grab_focus()
+        elif event.keyval == Gdk.KEY_Up and selectionChanged == False:
+            searchbuilder.get_object("search").grab_focus()
+        selectionChanged = False
     def onOutFocus(self, window, data):
         window.hide()
 
