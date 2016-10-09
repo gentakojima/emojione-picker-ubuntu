@@ -97,6 +97,7 @@ def apply_settings():
     # Save settings to file
     save_settings()
     # Reload app to apply new settings - FIXME: This is ugly and slow, could be much better
+    os.unlink(sockname)
     os.execv(__file__, sys.argv)
 
 def save_settings():
