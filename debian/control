@@ -10,7 +10,7 @@ Maintainer: Jorge Suárez de Lis <yo@jorgesuarezdelis.name>
 
 Package: emojione-picker
 Section: python
-Depends: python-gi (>=3.2), python2.7, python-notify (>=0.1), gir1.2-notify-0.7, gir1.2-appindicator3-0.1, gir1.2-rsvg-2.0
+Depends: python-gi (>=3.2), python2.7, python-notify (>=0.1), gir1.2-notify-0.7, gir1.2-appindicator3-0.1, gir1.2-rsvg-2.0, xdotool
 Architecture: all
 Description: Emoji Picker for the indicator area using Emoji One
  Emoji Picker featuring several menus and a search panel.

@@ -1,3 +1,13 @@
+emojione-picker (0.1~git20161009) trusty; urgency=medium
+
+  * Updated EmojiOne to 2016 Q3 release.
+  * Single instance mode, thanks to HarmtH. Lets you use a global hotkey to
+    call emojione-picker search window.
+  * Option to immediate write emoji using xdotool instead of placing on
+    clipboard [Experimental].
+
+ -- Jorge Suárez de Lis <yo@jorgesuarezdelis.name>  Tue, 9 Oct 2016 12:02:02 +0200
+
 emojione-picker (0.1~git20160614) trusty; urgency=medium
 
   * Added Exit option.
