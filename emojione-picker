@@ -186,16 +186,16 @@ for k in default_settings.keys():
 # Load recent emojis at startup
 recentfile = configpath + "/recent.json"
 if os.path.isfile(recentfile):
-  with open(recentfile) as recent_json_file:
-      recent = json.load(recent_json_file)
-  recentindex = 0
-  for k in recent.keys():
-      if(int(recent[k]["recent_order"])>recentindex):
-          recentindex = int(recent[k]["recent_order"])
-  recentindex += 1
+    with open(recentfile) as recent_json_file:
+        recent = json.load(recent_json_file)
+    recentindex = 0
+    for k in recent.keys():
+        if(int(recent[k]["recent_order"])>recentindex):
+            recentindex = int(recent[k]["recent_order"])
+    recentindex += 1
 else:
-  recent = dict()
-  recentindex = 0
+    recent = dict()
+    recentindex = 0
 
 # If using lowend, load lowend information
 if settings["lowend"] == True:
