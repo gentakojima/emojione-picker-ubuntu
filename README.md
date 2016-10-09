@@ -58,7 +58,17 @@ The **emoji search window** let you search emojis writing keywords. You can also
 
 The indicator usually takes 3 to 5 seconds to load, but it can take up to 30 seconds in older computers. In *Settings*, enable the option *Low end computer mode* to reduce the number of menu items (and emojis). That should speed up loading time. Currently, this mode shows about 1000 emojis out of 1800.
 
-The **emoji search window** can be placed under the current active window due to Unity/Compiz focus stealing prevention feature. This is not intended behaviour. Please take a look at issue #18.
+The **emoji search window** might be incorrectly placed under the current active window due to Unity/Compiz focus stealing prevention feature. This is not intended behaviour. The only known workaround is to disable this feature by running this command:
+
+```
+dconf write /org/compiz/profiles/unity/plugins/core/focus-prevention-level 0
+```
+
+If you want to enable the focus stealing prevention feature again, just run this command instead:
+
+```
+dconf write /org/compiz/profiles/unity/plugins/core/focus-prevention-level 1
+```
 
 ## License
 
