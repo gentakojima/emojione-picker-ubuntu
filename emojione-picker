@@ -3,6 +3,8 @@
 #
 
 import os
+import subprocess
+import time
 import sys
 import json
 from os.path import expanduser
@@ -37,7 +39,8 @@ default_settings = settings = {
     "toned": -1,
     "notifications": True,
     "lowend": False,
-    "recent": 20
+    "recent": 20,
+    "paste": False
 }
 configpath = expanduser("~") + "/.config/emojione-picker"
 os.path.isdir(configpath) or os.mkdir(configpath)
@@ -60,11 +63,17 @@ def open_settings_window(self, w):
     builder.get_object("check_notifications").set_active(settings["notifications"])
     builder.get_object("check_lowend").set_active(settings["lowend"])
     builder.get_object("recent").set_value(settings["recent"])
+    builder.get_object("check_paste").set_active(settings["paste"])
 
 class SettingsButtonHandler:
     def onButtonPressed(self, button):
         apply_settings()
         button.get_parent_window().destroy()
+    def onToggled(self,button):
+        if builder.get_object("check_paste").get_active() == True:
+            builder.get_object("check_notifications").set_sensitive(False)
+        else:
+            builder.get_object("check_notifications").set_sensitive(True)
 
 def apply_settings():
     global settings
@@ -73,7 +82,8 @@ def apply_settings():
         "toned": builder.get_object("combo_toned").get_active()-1,
         "notifications": builder.get_object("check_notifications").get_active(),
         "lowend": builder.get_object("check_lowend").get_active(),
-	"recent": builder.get_object("recent").get_value_as_int()
+	"recent": builder.get_object("recent").get_value_as_int(),
+        "paste": builder.get_object("check_paste").get_active()
     }
     # Save settings to file
     save_settings()
@@ -221,6 +231,12 @@ def refresh_recent_submenu():
         signals["recent_" + str(i)] = recent_items[i].connect("activate", item_response, sorted_recent[key])
         i = i + 1
 
+# Type character using xdootool [Experimental]
+def type_xdotool(text):
+    time.sleep(0.1)
+    subprocess.Popen(["xdotool", "type", text.decode('unicode-escape')])
+    return False # Glib.idle_add needs this
+
 # Click response
 def item_response(self, w):
     global recentindex, recent
@@ -232,18 +248,22 @@ def item_response(self, w):
     except AttributeError:
         pass
 
-    # Copy character to clipboard
+    # Copy character to clipboard or write it
     chars = w["unicode"].split("-")
     output = ""
     for char in chars:
         output = output + '\\U' + (char.zfill(8))
-    clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-    GLib.idle_add(clipboard.set_text,output.decode('unicode-escape'), -1)
+    if settings["paste"]==True:
+        GLib.idle_add(type_xdotool,output)
+    else:
+        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        GLib.idle_add(clipboard.set_text,output.decode('unicode-escape'), -1)
 
     # Show notification
     if settings["notifications"]==True:
-        n = Notify.Notification.new(w["name"].title(), "Emoji is now in the clipboard. Paste it wherever you want!", directory + "/assets/svg/" + w["unicode"] + ".svg")
-        n.show()
+        if settings["paste"]==False:
+            n = Notify.Notification.new(w["name"].title(), "Emoji is now in the clipboard. Paste it wherever you want!", directory + "/assets/svg/" + w["unicode"] + ".svg")
+            n.show()
 
     # Remove item from recent if already present
     try:
