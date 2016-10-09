@@ -43,12 +43,6 @@ If you installed it, the picker should be started on a fresh session start. Just
 
 If you want to manually run it right now, just press `Alt+F2` and write the command `emojione-picker`. If you used the standalone installer and installed it just for the current user, you might need to specify the path to the program, that is `~/.local/bin/emojione-picker`.
 
-## Troubleshooting issues
-
-The indicator usually takes 3 to 5 seconds to load, but it can take up to 30 seconds in older computers. In *Settings*, enable the option *Low end computer mode* to reduce the number of menu items (and emojis). That should speed up loading time. Currently, this mode shows about 1100 emojis out of 1700, but I intend to lower that to about 900 in the future.
-
-The **emoji search window** can be pleace under the current active window, due to Unity/Compiz focus stealing prevention feature. Please take a look at issue #18.
-
 ## How to use it
 
 To use the picker:
@@ -59,6 +53,12 @@ To use the picker:
 You can also enable the **experimental** option to type the emoji instead of using the clipboard in the Settings. If you are interested in this option, please let me know if this is working for you.
 
 The **emoji search window** let you search emojis writing keywords. You can also assign a global hotkey to the command `emojione-picker` and the search window will open on your current mouse position at any time.
+
+## Troubleshooting issues
+
+The indicator usually takes 3 to 5 seconds to load, but it can take up to 30 seconds in older computers. In *Settings*, enable the option *Low end computer mode* to reduce the number of menu items (and emojis). That should speed up loading time. Currently, this mode shows about 1000 emojis out of 1800.
+
+The **emoji search window** can be placed under the current active window due to Unity/Compiz focus stealing prevention feature. This is not intended behaviour. Please take a look at issue #18.
 
 ## License
 
