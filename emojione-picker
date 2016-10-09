@@ -30,7 +30,7 @@ for d in directories:
         break
 
 # Categories definitions
-categories = ["recent", "people", "food", "nature", "objects", "activity", "travel", "flags", "symbols", "unicode9"]
+categories = ["recent", "people", "food", "nature", "objects", "activity", "travel", "flags", "symbols"]
 
 # Settings handling
 default_settings = settings = { 
@@ -328,6 +328,9 @@ if __name__ == "__main__":
         category_item[category].set_submenu(category_menu[category]);
 
     # Load groups and icons definition and rearrange them in order
+    # FIXME Since last Unicode 9 update, some toned emojis have an order
+    #       greater than the untoned ones, and this leads to crashes.
+    #       Had to modify the emoji.json files to rearrange the order
     with open(directory + "/assets/groups.json") as groups_file:
         groups_data = json.load(groups_file)
     with open(directory + "/assets/emoji.json") as json_file:
@@ -397,7 +400,7 @@ if __name__ == "__main__":
                                 # Show all toned emojis in a submenu
                                 original_key = key
                                 chars = sorted_data[key]["unicode"].split("-")
-                                tone_group = chars[0] # FIXME this can be multibyte so taking the first byt isn't right
+                                tone_group = chars[0] # FIXME could be multibyte some day so taking the first byte isn't right
                                 if not tone_group in tone_groups:
                                     # Create tone submenu
                                     submenu_tones[tone_group] = Gtk.Menu()
