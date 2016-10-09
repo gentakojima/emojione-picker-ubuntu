@@ -105,14 +105,28 @@ def save_settings():
         json.dump(settings, outfile)
 
 # Search feature
-searchbuilder = Gtk.Builder()
+searchbuilder = None
+search_window = None
 def open_search_window(self, w):
-    searchbuilder.add_from_file(directory + "/assets/chooser.glade")
-    searchbuilder.connect_signals(SearchHandler())
-    search_window = searchbuilder.get_object("search_window")
-    search_window.show_all()
-    search_window.present()
-    search_window.grab_focus()
+    global searchbuilder
+    global search_window
+    # Build window only once
+    try:
+        search_window.show_all()
+        search_window.present()
+        search_window.grab_focus()
+    except:
+        searchbuilder = Gtk.Builder()
+        searchbuilder.add_from_file(directory + "/assets/chooser.glade")
+        searchbuilder.connect_signals(SearchHandler())
+        search_window = searchbuilder.get_object("search_window")
+        search_window.show_all()
+        search_window.present()
+        search_window.grab_focus()
+
+    # Grab focus on input field
+    searchfield = searchbuilder.get_object("search")
+    searchfield.grab_focus()
     
     # Put recent icons by default
     iconstore = searchbuilder.get_object("iconstore")
@@ -167,14 +181,14 @@ class SearchHandler:
     def onIconActivated(self, icon, index):
         global searchresults
         item_response(self, searchresults[int(index.to_string())])
-        icon.get_parent_window().destroy()
+        icon.get_parent_window().hide()
     def onKeyReleased(self, window, event):
         if event.keyval == Gdk.KEY_Escape:
-            window.destroy()
+            window.hide()
         elif event.keyval == Gdk.KEY_Down:
             searchbuilder.get_object("iconview").grab_focus()
     def onOutFocus(self, window, data):
-        window.destroy()
+        window.hide()
 
 # Load settings at startup
 configfile = configpath + "/settings.json"
