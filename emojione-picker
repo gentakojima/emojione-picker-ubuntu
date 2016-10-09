@@ -116,6 +116,7 @@ def open_search_window(self, w):
         search_window.present()
         search_window.grab_focus()
     except:
+        # Build window
         searchbuilder = Gtk.Builder()
         searchbuilder.add_from_file(directory + "/assets/chooser.glade")
         searchbuilder.connect_signals(SearchHandler())
@@ -124,21 +125,18 @@ def open_search_window(self, w):
         search_window.present()
         search_window.grab_focus()
 
-    # Grab focus on input field
-    searchfield = searchbuilder.get_object("search")
-    searchfield.grab_focus()
-    
-    # Put recent icons by default
-    iconstore = searchbuilder.get_object("iconstore")
-    global sorted_recent, searchresults
-    for i in sorted_recent:
-        emoji_name = sorted_recent[i]["name"]
-        emoji_image = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[i]["unicode"] + ".svg", 24, 24)
-        emoji_code = sorted_recent[i]["unicode"]
-        iconstore.append([emoji_image, emoji_code, emoji_name])
-    searchresults = []
-    for i in sorted_recent.keys():
-        searchresults.append(sorted_recent[i])
+        # Put recent icons by default
+        iconstore = searchbuilder.get_object("iconstore")
+        global sorted_recent, searchresults
+        for i in sorted_recent:
+            emoji_name = sorted_recent[i]["name"]
+            emoji_image = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_recent[i]["unicode"] + ".svg", 24, 24)
+            emoji_code = sorted_recent[i]["unicode"]
+            iconstore.append([emoji_image, emoji_code, emoji_name])
+            searchresults = []
+        for i in sorted_recent.keys():
+            searchresults.append(sorted_recent[i])
+
     return
 
 searchresults = None
