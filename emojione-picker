@@ -36,7 +36,7 @@ for d in directories:
 categories = ["recent", "people", "food", "nature", "objects", "activity", "travel", "flags", "symbols"]
 
 # Settings handling
-default_settings = settings = { 
+default_settings = settings = {
     "toned": -1,
     "notifications": True,
     "lowend": False,
@@ -87,7 +87,7 @@ class SettingsButtonHandler:
 def apply_settings():
     global settings
     # Get settings from dialog
-    settings = { 
+    settings = {
         "toned": builder.get_object("combo_toned").get_active()-1,
         "notifications": builder.get_object("check_notifications").get_active(),
         "lowend": builder.get_object("check_lowend").get_active(),
@@ -205,14 +205,14 @@ if os.path.isfile(configfile):
           settings = json.load(settings_json_file)
       except:
           save_settings()
-      
+
 else:
     save_settings()
 
 for k in default_settings.keys():
     if not k in settings:
         settings[k] = default_settings[k]
-  
+
 # Load recent emojis at startup
 recentfile = configpath + "/recent.json"
 if os.path.isfile(recentfile):
@@ -331,7 +331,7 @@ def item_response(self, w):
         json.dump(recent, outfile)
 
     # Refresh recent icons submenu
-    GLib.idle_add(refresh_recent_submenu)  
+    GLib.idle_add(refresh_recent_submenu)
 
 def get_emoji_group(code):
     for key in groups_data:
@@ -368,7 +368,7 @@ if __name__ == "__main__":
 
         # Get proper icon sizes
         iconsizes = Gtk.IconSize.lookup(Gtk.IconSize.MENU)
-        
+
         # Create categories items and submenus
         category_item = {}
         category_menu = {}
@@ -435,7 +435,7 @@ if __name__ == "__main__":
                                 # This won't happen, we are not grouping toned icons
                                 pass
                         else:
-                            if tones_re.match(sorted_data[key]["name"]) == None: 
+                            if tones_re.match(sorted_data[key]["name"]) == None:
                                 # Not toned emoji (aka simplest case), just add to menu
                                 pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(directory + "/assets/svg/" + sorted_data[key]["unicode"] + ".svg", iconsizes[1], iconsizes[2])
                                 img = Gtk.Image.new_from_pixbuf(pixbuf)
@@ -507,7 +507,7 @@ if __name__ == "__main__":
                                             # Replace action
                                             items[sorted_data[key]["unicode"]].disconnect(signals[key])
                                             signals[key] = items[sorted_data[key]["unicode"]].connect("activate", item_response, sorted_data[toned_key])
-                                    
+
         # Load icons into recent category
         recent_items = []
         for i in range (0, settings["recent"]):
@@ -536,9 +536,9 @@ if __name__ == "__main__":
         # Create settings item
         settings_item = Gtk.MenuItem("Settings...")
         GLib.idle_add(menu.append,settings_item)
-        GLib.idle_add(settings_item.show)    
+        GLib.idle_add(settings_item.show)
         settings_item.connect("activate", open_settings_window, "Settings")
-        
+
         # Create another separator
         separator = Gtk.SeparatorMenuItem()
         GLib.idle_add(menu.append,separator)
@@ -552,6 +552,9 @@ if __name__ == "__main__":
 
         # Associate menu with indicator
         ind.set_menu(menu)
+
+        # Enable middle-button mouse click to open search window
+        ind.set_secondary_activate_target(search_item)
 
         # Listen to socket
         try:
