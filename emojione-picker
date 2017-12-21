@@ -194,6 +194,8 @@ class SearchHandler:
         elif event.keyval == Gdk.KEY_Up and selectionChanged == False:
             searchbuilder.get_object("search").grab_focus()
         selectionChanged = False
+    def onInFocus(self, window, data):
+        searchbuilder.get_object("search").grab_focus()
     def onOutFocus(self, window, data):
         window.hide()
 

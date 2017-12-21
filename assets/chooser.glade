@@ -21,6 +21,7 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="urgency_hint">True</property>
     <property name="decorated">False</property>
+    <signal name="focus-in-event" handler="onInFocus" swapped="no"/>
     <signal name="focus-out-event" handler="onOutFocus" swapped="no"/>
     <signal name="key-release-event" handler="onKeyReleased" swapped="no"/>
     <child>
