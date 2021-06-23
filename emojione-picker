@@ -113,18 +113,28 @@ def open_search_window(self, w):
     global search_window
     # Build window only once
     try:
+        search_window.set_keep_above(True)
         search_window.show_all()
         search_window.present()
         search_window.grab_focus()
+	
+        # Without this, the subsequent click won't work. Replacing this with a sleep does not work. It's magic!
+        search_window.get_position()
+        os.system("xdotool click 1")
     except:
         # Build window
         searchbuilder = Gtk.Builder()
         searchbuilder.add_from_file(directory + "/assets/chooser.glade")
         searchbuilder.connect_signals(SearchHandler())
         search_window = searchbuilder.get_object("search_window")
+        search_window.set_keep_above(True)
         search_window.show_all()
         search_window.present()
         search_window.grab_focus()
+	
+        # Without this, the subsequent click won't work. Replacing this with a sleep does not work. It's magic!
+        search_window.get_position()
+        os.system("xdotool click 1")
 
         # Put recent icons by default
         iconstore = searchbuilder.get_object("iconstore")
